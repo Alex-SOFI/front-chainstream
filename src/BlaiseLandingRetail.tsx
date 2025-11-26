@@ -43,7 +43,7 @@ const BlaiseLandingRetail: React.FC = () => {
                             href="#waitlist"
                             className="rounded-full bg-white/5 px-4 py-2 text-[11px] font-semibold hover:bg-white/10 transition"
                         >
-                            Join waitlist
+                            Get early access
                         </a>
                         <a
                             href="/instit"
@@ -81,9 +81,9 @@ const BlaiseLandingRetail: React.FC = () => {
                             <div id="waitlist" className="mt-6 max-w-xl">
                                 <form
                                     onSubmit={handleSubmit}
-                                    className="flex flex-col gap-3 sm:flex-row sm:items-center"
+                                    className="flex flex-col gap-3"
                                 >
-                                    <div className="flex w-full flex-1 items-center rounded-full bg-white/5 px-3 py-2 ring-1 ring-white/15">
+                                    <div className="flex w-full items-center gap-2 rounded-full bg-white/5 px-3 py-2 ring-1 ring-white/15">
                                         <input
                                             type="email"
                                             required
@@ -92,7 +92,7 @@ const BlaiseLandingRetail: React.FC = () => {
                                         />
                                         <button
                                             type="submit"
-                                            className="ml-2 rounded-full bg-[#00FF66] px-5 py-1.5 text-xs font-semibold text-black hover:bg-[#34ff84] transition"
+                                            className="shrink-0 rounded-full bg-[#00FF66] px-6 py-2 text-xs font-semibold text-black hover:bg-[#34ff84] transition"
                                         >
                                             Get early access
                                         </button>
@@ -290,7 +290,7 @@ const BlaiseLandingRetail: React.FC = () => {
                             href="#waitlist"
                             className="mt-4 inline-flex items-center justify-center rounded-full bg-[#00FF66] px-5 py-2 text-xs font-semibold text-black hover:bg-[#34ff84] transition sm:mt-0"
                         >
-                            Join the waitlist
+                            Get early access
                         </a>
                     </section>
                 </main>

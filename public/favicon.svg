@@ -1,6 +1,14 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect x="2" y="2" width="13" height="13" rx="3" fill="white"/>
-  <rect x="17" y="2" width="13" height="13" rx="3" fill="#00FF66"/>
-  <rect x="2" y="17" width="13" height="13" rx="3" fill="white" fill-opacity="0.3"/>
-  <rect x="17" y="17" width="13" height="13" rx="3" fill="white" fill-opacity="0.1"/>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fond noir Blaise -->
+  <rect width="512" height="512" fill="#000D0C"></rect>
+
+  <!-- Bloc Blaise (logo "b" minimal) -->
+  <!-- carré haut -->
+  <rect x="176" y="96" width="96" height="96" fill="#FFFFFF"></rect>
+
+  <!-- jambage gauche -->
+  <rect x="176" y="192" width="96" height="160" fill="#FFFFFF"></rect>
+
+  <!-- forme arrondie droite -->
+  <path d="M272 192h96c26.5 0 48 21.5 48 48v112c0 26.5-21.5 48-48 48H272V192z" fill="#FFFFFF"></path>
 </svg>

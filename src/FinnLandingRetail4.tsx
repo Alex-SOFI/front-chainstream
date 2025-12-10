@@ -1,10 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
+import { submitWaitlistForm } from "./utils/formSubmit";
 
 const FinnLandingRetail4: React.FC = () => {
     const year = new Date().getFullYear();
+    const [email, setEmail] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setIsSubmitting(true);
+        setSubmitStatus("idle");
+
+        const result = await submitWaitlistForm({
+            email,
+            subject: "Nouvelle inscription à la waitlist Finn",
+            fromName: "Finn Waitlist",
+        });
+
+        if (result.success) {
+            setSubmitStatus("success");
+            setEmail("");
+            setTimeout(() => setSubmitStatus("idle"), 5000);
+        } else {
+            setSubmitStatus("error");
+        }
+
+        setIsSubmitting(false);
     };
 
     return (
@@ -77,17 +99,33 @@ const FinnLandingRetail4: React.FC = () => {
                                         <input
                                             type="email"
                                             required
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
                                             placeholder="Enter your email"
-                                            className="flex-1 bg-transparent text-sm text-[#0A0E0C] placeholder:text-[#888] focus:outline-none"
+                                            disabled={isSubmitting}
+                                            className="flex-1 bg-transparent text-sm text-[#0A0E0C] placeholder:text-[#888] focus:outline-none disabled:opacity-50"
                                         />
                                         <button
                                             type="submit"
-                                            className="ml-2 rounded-full bg-[#00D26A] px-5 py-1.5 text-xs font-semibold text-black hover:bg-[#1BE67F] transition"
+                                            disabled={isSubmitting}
+                                            className="ml-2 rounded-full bg-[#00D26A] px-5 py-1.5 text-xs font-semibold text-black hover:bg-[#1BE67F] transition disabled:opacity-50 disabled:cursor-not-allowed"
                                         >
-                                            Get access
+                                            {isSubmitting ? "Sending..." : "Get access"}
                                         </button>
                                     </div>
-                                    <p className="text-[11px] text-[#666]">No spam. Just launch updates.</p>
+                                    {submitStatus === "success" && (
+                                        <p className="text-[11px] text-[#00D26A]">
+                                            ✓ Merci ! Vous êtes maintenant sur la liste d'attente.
+                                        </p>
+                                    )}
+                                    {submitStatus === "error" && (
+                                        <p className="text-[11px] text-red-500">
+                                            ✗ Une erreur s'est produite. Veuillez réessayer.
+                                        </p>
+                                    )}
+                                    {submitStatus === "idle" && (
+                                        <p className="text-[11px] text-[#666]">No spam. Just launch updates.</p>
+                                    )}
                                 </form>
                             </div>
 

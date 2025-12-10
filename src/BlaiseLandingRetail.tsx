@@ -1,11 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
+import { submitWaitlistForm } from "./utils/formSubmit";
 
 const FinnLandingRetail: React.FC = () => {
     const year = new Date().getFullYear();
+    const [email, setEmail] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // plug into your waitlist backend / API
+        setIsSubmitting(true);
+        setSubmitStatus("idle");
+
+        const result = await submitWaitlistForm({
+            email,
+            subject: "Nouvelle inscription à la waitlist Finn",
+            fromName: "Finn Waitlist",
+        });
+
+        if (result.success) {
+            setSubmitStatus("success");
+            setEmail("");
+            setTimeout(() => setSubmitStatus("idle"), 5000);
+        } else {
+            setSubmitStatus("error");
+        }
+
+        setIsSubmitting(false);
     };
 
     return (
@@ -87,19 +108,35 @@ const FinnLandingRetail: React.FC = () => {
                                         <input
                                             type="email"
                                             required
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
                                             placeholder="Enter your email to join the waitlist"
-                                            className="flex-1 bg-transparent text-sm text-white placeholder:text-white/40 focus:outline-none"
+                                            disabled={isSubmitting}
+                                            className="flex-1 bg-transparent text-sm text-white placeholder:text-white/40 focus:outline-none disabled:opacity-50"
                                         />
                                         <button
                                             type="submit"
-                                            className="shrink-0 rounded-full bg-[#00FF66] px-6 py-2 text-xs font-semibold text-black hover:bg-[#34ff84] transition"
+                                            disabled={isSubmitting}
+                                            className="shrink-0 rounded-full bg-[#00FF66] px-6 py-2 text-xs font-semibold text-black hover:bg-[#34ff84] transition disabled:opacity-50 disabled:cursor-not-allowed"
                                         >
-                                            Get early access
+                                            {isSubmitting ? "Sending..." : "Get early access"}
                                         </button>
                                     </div>
-                                    <p className="text-[11px] text-white/55">
-                                        No spam. Just launch updates and first access.
-                                    </p>
+                                    {submitStatus === "success" && (
+                                        <p className="text-[11px] text-[#00FF66]">
+                                            ✓ Merci ! Vous êtes maintenant sur la liste d'attente.
+                                        </p>
+                                    )}
+                                    {submitStatus === "error" && (
+                                        <p className="text-[11px] text-red-400">
+                                            ✗ Une erreur s'est produite. Veuillez réessayer.
+                                        </p>
+                                    )}
+                                    {submitStatus === "idle" && (
+                                        <p className="text-[11px] text-white/55">
+                                            No spam. Just launch updates and first access.
+                                        </p>
+                                    )}
                                 </form>
                             </div>
 

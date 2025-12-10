@@ -1,8 +1,8 @@
 <svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-  <!-- Fond noir Blaise -->
+  <!-- Fond noir Finn -->
   <rect width="512" height="512" fill="#000D0C"></rect>
 
-  <!-- Bloc Blaise (logo "b" minimal) -->
+  <!-- Bloc Finn (logo "b" minimal) -->
   <!-- carré haut -->
   <rect x="176" y="96" width="96" height="96" fill="#FFFFFF"></rect>
 

@@ -139,7 +139,7 @@ const FinnLanding: React.FC = () => {
                         </div>
                     </section>
 
-                    {/* WHAT BLAISE CHANGES */}
+                    {/* WHAT FINN CHANGES */}
                     <section id="what" className="space-y-6">
                         <div className="max-w-3xl">
                             <h2 className="text-2xl font-semibold tracking-tight">
